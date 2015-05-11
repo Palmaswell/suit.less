@@ -1,0 +1,64 @@
+//-- Suitless --//
+//-- Mixins that allow developers to write CSS according to the SuitCSS
+//-- naming convention. More information can be found under:
+//-- https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md
+
+//-- Component --//
+//-- The first parameter accepts the component name.
+//-- The second parameter accepts the components rule declarations.
+//-- The component's name must be written in pascal case.
+//-- Nothing else in the HTML/CSS uses pascal case!!!!
+.Component(@ComponentName; @ComponentRules) {
+    .@{ComponentName} {
+        @ComponentRules();
+
+        //-- Component-decendent --//
+        //-- Enter the decendent suffix as first parameter.
+        //-- A component descendent is a class that is attached
+        //-- to a descendent node of a component.
+        //-- It's responsible for applying presentation directly
+        //-- to the descendent on behalf of a particular component.
+        //-- Descendent names must be written in camel case.
+        .Component-decendent(@DecendentSuffix; @DecendentRules) {
+            .@{ComponentName}-@{DecendentSuffix} {
+                @DecendentRules();
+            }
+        }
+
+        //-- Component--modifier --//
+        //-- Enter the modifier suffix as first parameter.
+        //-- A component modifier is a class that modifies the presentation of
+        //-- the base component in some form (e.g., for a certain configuration
+        //-- of the component). Modifier names must be written in camel casebe
+        //--  and separated from the component name by two hyphens. The class  //-- should be included in the HTML in addition to the
+        //-- base component class.
+        .Component--modifier(@ModifierSuffix; @ModifierRules) {
+            .@{ComponentName}--@{ModifierSuffix} {
+                @ModifierRules();
+            }
+        }
+    }
+}
+
+//-- States --//
+//-- States can only be used within the component scope because
+//-- their classes will be adjoined.
+//-- The state name must be camel case.
+//-- This means that the same state names can be used in multiple contexts, but //-- every component must define its own styles for the state
+//--(as they are scoped to the component).
+.state(@StateSuffix; @StateRules) {
+    &.is-@{StateSuffix} {
+        @StateRules();
+    }
+}
+
+
+//-- Utilities --//
+//-- Enter the utility name as parameter and the mixin takes care of the rest.
+//-- Low-level structural and positional traits.
+//-- Utilities can be applied directly to any element within a component.
+.utility(@UtilitySuffix; @UtilityRules) {
+    .u-@{UtilitySuffix} {
+        @UtilityRules();
+    }
+}
