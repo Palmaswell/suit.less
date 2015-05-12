@@ -20,7 +20,7 @@
         //-- to the descendent on behalf of a particular component.
         //-- Descendent names must be written in camel case.
         .Component-decendent(@DecendentSuffix; @DecendentRules) {
-            .@{ComponentName}-@{DecendentSuffix} {
+            &-@{DecendentSuffix} {
                 @DecendentRules();
             }
         }
@@ -33,7 +33,7 @@
         //--  and separated from the component name by two hyphens. The class  //-- should be included in the HTML in addition to the
         //-- base component class.
         .Component--modifier(@ModifierSuffix; @ModifierRules) {
-            .@{ComponentName}--@{ModifierSuffix} {
+            &--@{ModifierSuffix} {
                 @ModifierRules();
             }
         }
